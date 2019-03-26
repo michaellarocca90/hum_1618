@@ -34,15 +34,12 @@ class CardWidgetState extends State<CardWidget>{
 
   void _addNewCardWidget(){
 
-    manager.createNewCardPerson();
-
-
-
-    
     setState(() {
+      manager.createNewCardPerson();
       
     });
 
+    
   }
 
   Widget _buildCardWidget(){

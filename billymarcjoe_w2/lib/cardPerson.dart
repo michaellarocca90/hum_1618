@@ -14,8 +14,11 @@ class CardPerson {
 }
 
 class CardPersonManger {
+
   int counter = 0;
+
   List<CardPerson> cardPersons = new List();
+  
   List<CardPerson> createCardPersons () {
 
     cardPersons.add(CardPerson("Jason", "Splash_1.jpg"));
