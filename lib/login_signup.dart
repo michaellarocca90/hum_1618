@@ -24,8 +24,6 @@ class _LoginSignupState extends State<LoginSignup> {
   FormMode _formMode = FormMode.LOGIN;
   bool _isIos;
 
-// when a use is new and has no auth object assigned to them, they need to be directed to the sign in page
-//when a user is returning and has an auth object all is well, else they need to be directed to the login page
 
   bool _validateAndSave() {
     final form = _formKey.currentState;
@@ -73,6 +71,9 @@ class _LoginSignupState extends State<LoginSignup> {
       }
     }
   }
+
+//implement signUp button swap which leads to Profile Info Flow.  
+
 
   @override
   void initState() {
