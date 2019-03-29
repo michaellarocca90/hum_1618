@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hum_1618/guest_routes/home_page.dart';
+import 'auth.dart';
+import 'login_signup.dart';
+
+// import 'package:hum_1618/guest_routes/home_page.dart';
 
 
 void main() => runApp(MyApp());
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: LoginSignup(new Auth()),
     );
   }
 }
