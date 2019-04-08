@@ -27,7 +27,7 @@ Widget _registerButton(BuildContext context) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => LoginSignup(new Auth())))
+                      builder: (context) => LoginSignup(new Auth(), false)))
             },
         child: new Text(
           'Register',
@@ -45,7 +45,10 @@ Widget _signInButton(BuildContext context) {
   return Container(
       alignment: Alignment(0.75, 0.85),
       child: MaterialButton(
-        onPressed: () => {},
+        onPressed: () => {Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => LoginSignup(new Auth(), true)))},
         shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0)),
         child: new Text(

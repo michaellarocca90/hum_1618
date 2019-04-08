@@ -4,8 +4,8 @@ import '../widgets/base_background.dart';
 
 class LoginSignup extends StatefulWidget {
   final BaseAuth auth;
-
-  LoginSignup(this.auth);
+  bool isLogin;
+  LoginSignup(this.auth, this.isLogin);
 
   @override
   State<StatefulWidget> createState() {
@@ -44,11 +44,13 @@ class _LoginSignupState extends State<LoginSignup> {
       try {
         if (_formMode == FormMode.LOGIN) {
           userId = await widget.auth.signIn(_email, _password);
+          //userId?? do something -> profile or feed
           print('Signed in: $userId');
         } else {
           userId = await widget.auth.signUp(_email, _password);
           widget.auth.sendEmailVerification();
           // _showVerifyEmailSentDialog();
+          //userId?? need user info -> registration flow
           print('Signed up user: $userId');
         }
         setState(() {
@@ -73,11 +75,12 @@ class _LoginSignupState extends State<LoginSignup> {
   }
 
 //implement signUp button swap which leads to Profile Info Flow.
-
+  
   @override
   void initState() {
     super.initState();
     _isLoading = false;
+    _formMode = widget.isLogin ? FormMode.LOGIN : FormMode.SIGNUP;
   }
 
   @override
