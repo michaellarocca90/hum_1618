@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:simple_permissions/simple_permissions.dart';
+
 
 List<CameraDescription> cameras;
 
@@ -94,9 +94,11 @@ class _CameraAppState extends State<CameraApp> {
     // controller.dispose();
     initializeCamera();
   }
+
+  //simple permissions removed due to build issues, new file path must be found or saved directly to firebase.
   void startVideo() async {
-    Directory appDocDir = await getExternalStorageDirectory();
-    String appDocPath = appDocDir.path +
+    String appDocDir = '';
+    String appDocPath = appDocDir +
         "/video_" +
         DateTime.now().millisecondsSinceEpoch.toString()+".mp4";
     print("Before start");
