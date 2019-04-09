@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>371344649976-jsheo8nahr55e7enbu51dn6tu1e1a27q.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.371344649976-jsheo8nahr55e7enbu51dn6tu1e1a27q</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAWflct6618rz8bJsavkvGGdnx8mJeo5rs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>371344649976</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.hum1618</string>
+	<key>PROJECT_ID</key>
+	<string>hum-backend</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hum-backend.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:371344649976:ios:a2017b0a5267d832</string>
+	<key>DATABASE_URL</key>
+	<string>https://hum-backend.firebaseio.com</string>
+</dict>
+</plist>
