@@ -14,7 +14,7 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseBackground(
-        RegisterForm(userId), "assets/hum_shake_purp_middle.png");
+        RegisterForm(userId), "assets/hum_shake_purp_large.jpg");
   }
 }
 
@@ -59,7 +59,7 @@ class RegisterFormState extends State<RegisterForm> {
             controller: zipController,
             decoration: new InputDecoration(
                 labelText: "ZIP Code",
-                fillColor: Colors.white.withOpacity(.15),
+                fillColor: Colors.white.withOpacity(.35),
                 filled: true,
                 border: OutlineInputBorder()),
             keyboardType: TextInputType.number,
@@ -78,7 +78,7 @@ class RegisterFormState extends State<RegisterForm> {
             controller: bioController,
             decoration: new InputDecoration(
                 labelText: "Bio (optional)",
-                fillColor: Colors.white.withOpacity(.15),
+                fillColor: Colors.white.withOpacity(.35),
                 filled: true,
                 border: OutlineInputBorder()),
             keyboardType: TextInputType.multiline,
@@ -132,7 +132,7 @@ class RegisterFormState extends State<RegisterForm> {
                   'Back',
                   style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
-                color: Colors.grey.withOpacity(.2),
+                color: Colors.grey.withOpacity(.35),
                 onPressed: () => {Navigator.pop(context)},
               ))
         ],
