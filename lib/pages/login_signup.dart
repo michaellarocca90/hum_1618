@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../auth.dart';
 import '../widgets/base_background.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../register.dart';
 
 class LoginSignup extends StatefulWidget {
   final BaseAuth auth;
@@ -61,6 +62,12 @@ class _LoginSignupState extends State<LoginSignup> {
           widget.auth.sendEmailVerification();
           // _showVerifyEmailSentDialog();
           //userId?? need user info -> registration flow
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RegisterPage(userId)
+            )
+          );
           print('Signed up user: $userId');
         }
         setState(() {

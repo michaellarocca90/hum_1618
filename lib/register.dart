@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'base_background.dart';
 import 'common/hum_textfield.dart';
 import 'common/hum_customtextfield.dart';
@@ -6,13 +7,21 @@ import 'common/hum_dropdown.dart';
 import 'common/hum_checkbox.dart';
 
 class RegisterPage extends StatelessWidget {
+  String userId;
+
+  RegisterPage(this.userId);
+
   @override
   Widget build(BuildContext context) {
-    return BaseBackground(RegisterForm(), "assets/hum_shake_purp_middle.png");
+    return BaseBackground(
+        RegisterForm(userId), "assets/hum_shake_purp_middle.png");
   }
 }
 
 class RegisterForm extends StatefulWidget {
+  String userId;
+
+  RegisterForm(this.userId);
   @override
   RegisterFormState createState() {
     return RegisterFormState();
@@ -50,7 +59,7 @@ class RegisterFormState extends State<RegisterForm> {
             controller: zipController,
             decoration: new InputDecoration(
                 labelText: "ZIP Code",
-                fillColor: Colors.white.withOpacity(.25),
+                fillColor: Colors.white.withOpacity(.15),
                 filled: true,
                 border: OutlineInputBorder()),
             keyboardType: TextInputType.number,
@@ -69,7 +78,7 @@ class RegisterFormState extends State<RegisterForm> {
             controller: bioController,
             decoration: new InputDecoration(
                 labelText: "Bio (optional)",
-                fillColor: Colors.white.withOpacity(.25),
+                fillColor: Colors.white.withOpacity(.15),
                 filled: true,
                 border: OutlineInputBorder()),
             keyboardType: TextInputType.multiline,
@@ -90,12 +99,26 @@ class RegisterFormState extends State<RegisterForm> {
                 ),
                 color: Colors.purple,
                 onPressed: () {
+                  // print(zipController);
+
                   setState(() {
                     _submitted = true;
                   });
 
                   if (_formKey.currentState.validate() && _optedIn) {
                     // TODO: POST data
+                    Firestore.instance
+                        .collection('users')
+                        .document(widget.userId)
+                        .setData({
+                      'profile': {
+                        'first_name': firstNameController.text,
+                        'last_name': lastNameController.text,
+                        'gender': _gender
+                      },
+                      'type': _type,
+                      'zip_code': zipController.text
+                    });
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text("Successfully registered!"),
                     ));
