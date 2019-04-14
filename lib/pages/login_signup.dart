@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../auth.dart';
 import '../widgets/base_background.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginSignup extends StatefulWidget {
   final BaseAuth auth;
@@ -46,15 +45,6 @@ class _LoginSignupState extends State<LoginSignup> {
         if (_formMode == FormMode.LOGIN) {
           userId = await widget.auth.signIn(_email, _password);
           //userId?? do something -> profile or feed
-          Firestore.instance
-              .collection('users')
-              .document('DLv7WL41jfnUWgZg0leY')
-              .get()
-              .then((DocumentSnapshot ds) {
-            // use ds as a snapshot
-            print('ds: $ds.email');
-          });
-
           print('Signed in: $userId');
         } else {
           userId = await widget.auth.signUp(_email, _password);
@@ -85,7 +75,7 @@ class _LoginSignupState extends State<LoginSignup> {
   }
 
 //implement signUp button swap which leads to Profile Info Flow.
-
+  
   @override
   void initState() {
     super.initState();
