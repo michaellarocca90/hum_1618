@@ -14,7 +14,7 @@ export 'firebase/firebaseAuthorization.dart';
 export 'pages/splash.dart';
 export 'pages/registerNewUser.dart';
 export 'pages/signInExistingUser.dart';
-export 'pages/registrationForm.dart';
+export 'pages/registrationInfoForm.dart';
 
 // Imports from pages/profilefeed
 export 'pages/profileFeed/feed.dart';

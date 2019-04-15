@@ -19,6 +19,7 @@ abstract class AbsFireBaseAuthorization {
 
 
 
+// FireBase Methods for sending and reciveing user profile data
 class FireBaseAuthorization implements AbsFireBaseAuthorization {
 
   // Entry Point for Firebase SDK

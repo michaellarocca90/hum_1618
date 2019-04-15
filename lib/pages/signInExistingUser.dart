@@ -9,13 +9,14 @@ import '../shelf.dart';
 
 
 
-// Login Class - For signing an Existing User
+// LoginExistingUser Class - For signing an Existing User
 class LoginExistingUser extends StatefulWidget {
 
-  // Constucutor
+  // Constucutor - with fireBaseAurthdation class for an argument
   LoginExistingUser(this.authorized);
 
 
+  // Form - fireBaseAurthorization
   final AbsFireBaseAuthorization authorized;
 
 
@@ -29,14 +30,20 @@ class LoginExistingUser extends StatefulWidget {
 
 class _LoginExistingUserState extends State<LoginExistingUser> {
 
+
+  // Form Key - For debugging Purpures
   final _formKey = new GlobalKey<FormState>();
 
+
+  // Member Variables
   String _email;
   String _password;
   bool _isLoading;
   String _errorMessage;
   bool _isIos;
 
+
+  // Form Validation for Correct Error debugging
   bool _validateAndSave() {
     final form = _formKey.currentState;
     if (form.validate()) {
@@ -56,28 +63,26 @@ class _LoginExistingUserState extends State<LoginExistingUser> {
       String userId = "";
       try {
 
-          userId = await widget.authorized.loginExistingUser(_email, _password);
-          //userId?? do something -> profile or feed
-          Firestore.instance
-              .collection('users')
-              .document('DLv7WL41jfnUWgZg0leY')
-              .get()
-              .then((DocumentSnapshot ds) {
-            // use ds as a snapshot
-            print('ds: $ds.email');
+        // Main Call for User Log-IN
+        userId = await widget.authorized.loginExistingUser(_email, _password);
+
+        // Create FireStore Instance - User documenation
+        Firestore.instance
+        .collection('users')
+        .document('DLv7WL41jfnUWgZg0leY')
+        .get()
+        .then((DocumentSnapshot ds) {
+
+          print('ds: $ds.email');
           });
-
           print('Signed in: $userId');
-   
-        setState(() {
-          _isLoading = false;
-        });
 
-        // if (userId.length > 0 && userId != null && _formMode == FormMode.LOGIN) {
-        //   widget.onSignedIn();
-        // }
+          setState(() {
+            _isLoading = false;
+            });
 
       } catch (e) {
+
         print('Error: $e');
         setState(() {
           _isLoading = false;
@@ -89,8 +94,6 @@ class _LoginExistingUserState extends State<LoginExistingUser> {
       }
     }
   }
-
-//implement signUp button swap which leads to Profile Info Flow.
 
   @override
   void initState() {
