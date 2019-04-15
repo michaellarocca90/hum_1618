@@ -1,5 +1,11 @@
+
+// Flutter Imports
 import 'package:flutter/material.dart';
-import './pages/splash.dart';
+
+// Project Libray import
+import 'shelf.dart';
+
+
 
 void main() => runApp(HumApp());
 

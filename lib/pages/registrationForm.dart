@@ -1,10 +1,12 @@
+
+// Flutter Imports
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'base_background.dart';
-import 'common/hum_textfield.dart';
-import 'common/hum_customtextfield.dart';
-import 'common/hum_dropdown.dart';
-import 'common/hum_checkbox.dart';
+
+// Project Library Import
+import '../shelf.dart';
+
+
 
 class RegisterPage extends StatelessWidget {
   String userId;

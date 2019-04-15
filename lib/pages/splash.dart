@@ -1,7 +1,10 @@
+
+// Flutter Packages Import
 import 'package:flutter/material.dart';
-import '../widgets/base_background.dart';
-import '../pages/login_signup.dart';
-import '../auth.dart';
+
+// Project Library Import
+import '../shelf.dart';
+
 
 class SplashPage extends StatelessWidget {
   @override
@@ -16,7 +19,7 @@ Widget _splashButtons(BuildContext context) {
   );
 }
 
-// this can be refactored to a single function that takes an alignment property
+// Registration Button --> registerNewUser.dart
 Widget _registerButton(BuildContext context) {
   return Container(
       alignment: Alignment(-0.75, 0.85),
@@ -27,7 +30,7 @@ Widget _registerButton(BuildContext context) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => LoginSignup(new Auth(), false)))
+                      builder: (context) => RegsiterNewUser(new FireBaseAuthorization())))
             },
         child: new Text(
           'Register',
@@ -41,6 +44,7 @@ Widget _registerButton(BuildContext context) {
       ));
 }
 
+// Sign-In Button --> signinExistingUser.dart
 Widget _signInButton(BuildContext context) {
   return Container(
       alignment: Alignment(0.75, 0.85),
@@ -48,7 +52,7 @@ Widget _signInButton(BuildContext context) {
         onPressed: () => {Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => LoginSignup(new Auth(), true)))},
+                      builder: (context) => LoginExistingUser(new FireBaseAuthorization())))},
         shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0)),
         child: new Text(
