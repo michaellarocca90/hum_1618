@@ -46,16 +46,7 @@ class _LoginSignupState extends State<LoginSignup> {
       try {
         if (_formMode == FormMode.LOGIN) {
           userId = await widget.auth.signIn(_email, _password);
-          //userId?? do something -> profile or feed
-          Firestore.instance
-              .collection('users')
-              .document('DLv7WL41jfnUWgZg0leY')
-              .get()
-              .then((DocumentSnapshot ds) {
-            // use ds as a snapshot
-            print('ds: $ds.email');
-          });
-
+          
           print('Signed in: $userId');
         } else {
           userId = await widget.auth.signUp(_email, _password);
