@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Project Library Import
-import '../shelf.dart';
-
+import '../../shelf.dart';
 
 
 
@@ -65,16 +64,7 @@ class _LoginExistingUserState extends State<LoginExistingUser> {
 
         // Main Call for User Log-IN
         userId = await widget.authorized.loginExistingUser(_email, _password);
-
-        // Create FireStore Instance - User documenation
-        Firestore.instance
-        .collection('users')
-        .document('DLv7WL41jfnUWgZg0leY')
-        .get()
-        .then((DocumentSnapshot ds) {
-
-          print('ds: $ds.email');
-          });
+        
           print('Signed in: $userId');
 
           setState(() {

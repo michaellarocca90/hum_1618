@@ -11,10 +11,10 @@ export 'firebase/firebaseAuthorization.dart';
 
 
 // Imports from Pages Folder
-export 'pages/splash.dart';
-export 'pages/registerNewUser.dart';
-export 'pages/signInExistingUser.dart';
-export 'pages/registrationInfoForm.dart';
+export 'pages/homeScreen-1.dart';
+export 'pages/registraionFlow/registerNewUser.dart';
+export 'pages/registraionFlow/registrationInfoForm.dart';
+export 'pages/registraionFlow/signInExistingUser.dart';
 
 // Imports from pages/profilefeed
 export 'pages/profileFeed/feed.dart';
@@ -22,9 +22,6 @@ export 'pages/profileFeed/feed.dart';
 
 
 // Import From Widgets Folder
-export 'widgets/base_background.dart';
-export 'widgets/hum_checkbox.dart';
-export 'widgets/hum_customtextfield.dart';
-export 'widgets/hum_dropdown.dart';
-export 'widgets/hum_textfield.dart';
+export 'widgets/widgets_common.dart';
+
 

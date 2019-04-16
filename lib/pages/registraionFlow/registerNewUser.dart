@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Project Library Import
-import '../shelf.dart';
+import '../../shelf.dart';
 
 
 // Registration Class for creating a new account
