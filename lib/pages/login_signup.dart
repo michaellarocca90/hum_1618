@@ -3,6 +3,7 @@ import '../auth.dart';
 import '../widgets/base_background.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../register.dart';
+import './home_page.dart';
 
 class LoginSignup extends StatefulWidget {
   final BaseAuth auth;
@@ -46,7 +47,14 @@ class _LoginSignupState extends State<LoginSignup> {
       try {
         if (_formMode == FormMode.LOGIN) {
           userId = await widget.auth.signIn(_email, _password);
-          
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage()
+            )
+          );
+
           print('Signed in: $userId');
         } else {
           userId = await widget.auth.signUp(_email, _password);
