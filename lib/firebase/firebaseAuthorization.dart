@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 
-abstract class BaseAuth {
-  Future<String> signIn(String email, String password);
 
-  Future<String> signUp(String email, String password);
+// Abstract Class - Ensuring Methods for FirebaseAuthorization Class
+abstract class AbsFireBaseAuthorization {
+  Future<String> loginExistingUser(String email, String password);
+
+  Future<String> registerNewUser(String email, String password);
 
   Future<FirebaseUser> getCurrentUser();
 
@@ -15,29 +17,39 @@ abstract class BaseAuth {
   Future<bool> isEmailVerified();
 }
 
-class Auth implements BaseAuth {
+
+
+// FireBase Methods for sending and reciveing user profile data
+class FireBaseAuthorization implements AbsFireBaseAuthorization {
+
+  // Entry Point for Firebase SDK
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  Future<String> signIn(String email, String password) async {
+  // Loging Entry Point for existing User
+  Future<String> loginExistingUser(String email, String password) async {
     FirebaseUser user = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
     return user.uid;
   }
 
-  Future<String> signUp(String email, String password) async {
+  // Registering New User
+  Future<String> registerNewUser(String email, String password) async {
     FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
     return user.uid;
   }
 
+  // Getting Current User
   Future<FirebaseUser> getCurrentUser() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user;
   }
 
+  // Signing Out for Current User
   Future<void> signOut() async {
     return _firebaseAuth.signOut();
   }
+
 
   Future<void> sendEmailVerification() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
