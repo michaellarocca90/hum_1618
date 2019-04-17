@@ -1,7 +1,6 @@
 
 // Flutter Packages
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Project Library Import
 import '../../shelf.dart';
@@ -16,7 +15,7 @@ class RegsiterNewUser extends StatefulWidget {
   // Abstract Class for FireBase Interaction
   final AbsFireBaseAuthorization authorized;
 
-  
+
   @override
   State<StatefulWidget> createState() {
     return _RegisterNewUser();
@@ -30,7 +29,6 @@ class _RegisterNewUser extends State<RegsiterNewUser> {
 
   // Form Key For debugging Purpuses
   final _formKey = new GlobalKey<FormState>();
-
 
   // Class Variables
   String _email;
@@ -126,7 +124,14 @@ class _RegisterNewUser extends State<RegsiterNewUser> {
               children: <Widget>[
                 _showInput('Email'),
                 _showInput('Password'),
-                _showPrimaryButton()
+                CommonAppButtons(
+                  AppButtonType.FUNCTION,
+                  "Create Account",
+                  Alignment.center,
+                  _validateAndSubmit,
+                  new BorderRadius.circular(40.0),
+                  new TextStyle(fontSize: 25)
+                )
               ],
             ),
           ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../shelf.dart';
+
 class BaseBackground extends StatelessWidget{
   final Widget toRecieveBackground;
   final String assetPath;
@@ -57,8 +59,6 @@ class HumCustomTextField extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 6.0), child: _formField);
   }
 }
-
-
 
 class HumDropdown extends StatelessWidget {
   final String _label;
@@ -120,4 +120,92 @@ class HumTextField extends StatelessWidget {
               border: OutlineInputBorder()),
         ));
   }
+}
+
+
+
+
+enum AppButtonType {NAVIGATION, FUNCTION}
+
+class CommonAppButtons extends StatelessWidget{
+
+  final AppButtonType _buttonType;
+  final String _displayText;
+  final Alignment _alignment;
+  final Object _pageRoute;
+  final BorderRadius _borderRadius;
+  final TextStyle _textStyle;
+
+
+
+  CommonAppButtons(
+    this._buttonType,
+    this._displayText, 
+    this._alignment, 
+    this._pageRoute,
+    this._borderRadius,
+    this._textStyle);
+
+  Widget build(BuildContext context) {
+
+    switch (_buttonType){
+
+      case AppButtonType.FUNCTION:
+      return _commonFucntionButton(context);
+      break;
+
+      case AppButtonType.NAVIGATION:
+      return _commonNavigationButton(context);
+      break;
+    }
+    
+  }
+
+  Widget _commonNavigationButton(BuildContext context) {
+  return Container(
+      alignment: _alignment,
+      child: MaterialButton(
+
+        onPressed: () => {Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => _pageRoute
+                      ))},
+
+        shape: new RoundedRectangleBorder(
+            borderRadius: _borderRadius),
+        
+        child: new Text(
+          _displayText,
+          style:
+          _textStyle,
+        ),
+        color: Colors.white,
+        splashColor: Colors.purpleAccent,
+        textColor: Colors.purple,
+      ));
+  }
+    Widget _commonFucntionButton(BuildContext context) {
+  return Container(
+      alignment: _alignment,
+      child: MaterialButton(
+
+        onPressed: () => _pageRoute,
+
+        shape: new RoundedRectangleBorder(
+            borderRadius: _borderRadius),
+        
+        child: new Text(
+          _displayText,
+          style:
+          _textStyle,
+        ),
+        color: Colors.white,
+        splashColor: Colors.purpleAccent,
+        textColor: Colors.purple,
+      ));
+  }
+
+
+
 }

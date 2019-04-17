@@ -10,15 +10,16 @@
 export 'firebase/firebaseAuthorization.dart';
 
 
-// Imports from Pages Folder
-export 'pages/homeScreen-1.dart';
-export 'pages/registraionFlow/registerNewUser.dart';
-export 'pages/registraionFlow/registrationInfoForm.dart';
-export 'pages/registraionFlow/signInExistingUser.dart';
+// Home Screen
+export 'pages/1_homeScreen/homeScreen-1.dart';
+
+// Registration Flow
+export 'pages/2_registraionFlow/registerNewUser.dart';
+export 'pages/2_registraionFlow/registrationInfoForm.dart';
+export 'pages/2_registraionFlow/signInExistingUser.dart';
 
 // Imports from pages/profilefeed
-export 'pages/profileFeed/feed.dart';
-
+export 'pages/3_profileFeed/feed.dart';
 
 
 // Import From Widgets Folder
