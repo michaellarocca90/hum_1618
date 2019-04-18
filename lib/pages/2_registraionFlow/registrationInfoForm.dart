@@ -118,7 +118,8 @@ class RegisterFormState extends State<RegisterForm> {
                         'gender': _gender
                       },
                       'type': _type,
-                      'zip_code': zipController.text
+                      'zip_code': zipController.text,
+                      'bio' :bioController.text
                     });
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text("Successfully registered!"),

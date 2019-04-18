@@ -10,8 +10,8 @@
 export 'firebase/firebaseAuthorization.dart';
 
 
-// Home Screen
-export 'pages/1_homeScreen/homeScreen-1.dart';
+// Splash Pages
+export 'pages/1_splashPage/splash.dart';
 
 // Registration Flow
 export 'pages/2_registraionFlow/registerNewUser.dart';
@@ -23,6 +23,9 @@ export 'pages/3_profileFeed/feed.dart';
 
 
 // Import From Widgets Folder
-export 'widgets/widgets_common.dart';
-
-
+export 'widgets/base_background.dart';
+export 'widgets/check_box.dart';
+export 'widgets/common_button.dart';
+export 'widgets/custom_textfield.dart';
+export 'widgets/drop_down.dart';
+export 'widgets/text_field.dart';

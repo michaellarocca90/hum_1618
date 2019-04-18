@@ -103,7 +103,13 @@ class _LoginExistingUserState extends State<LoginExistingUser> {
               children: <Widget>[
                 _showInput('Email'),
                 _showInput('Password'),
-                _showPrimaryButton()
+               CommonAppButtons.function(
+                  AppButtonType.FUNCTION,
+                  "Create Account",
+                  Alignment.center,
+                  new BorderRadius.circular(40.0),
+                  new TextStyle(fontSize: 25),
+                  _validateAndSubmit)
               ],
             ),
           ),
@@ -128,22 +134,6 @@ class _LoginExistingUserState extends State<LoginExistingUser> {
           validator: (value) => value.isEmpty ? '$type can\'t be empty' : null,
           onSaved: (value) =>
               type == "Email" ? _email = value : _password = value,
-        ));
-  }
-
-  Widget _showPrimaryButton() {
-    return Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 75.0),
-        child: SizedBox(
-          height: 40.0,
-          child: MaterialButton(
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0)),
-              color: Colors.purple,
-              child: new Text('Login',
-              style: new TextStyle(fontSize: 17.5, color: Colors.white)),
-              onPressed: _validateAndSubmit,
-              splashColor: Colors.purpleAccent),
         ));
   }
 }

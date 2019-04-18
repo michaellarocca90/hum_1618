@@ -124,15 +124,15 @@ class _RegisterNewUser extends State<RegsiterNewUser> {
               children: <Widget>[
                 _showInput('Email'),
                 _showInput('Password'),
-                CommonAppButtons(
+
+                CommonAppButtons.function(
                   AppButtonType.FUNCTION,
                   "Create Account",
                   Alignment.center,
-                  _validateAndSubmit,
                   new BorderRadius.circular(40.0),
-                  new TextStyle(fontSize: 25)
-                )
-              ],
+                  new TextStyle(fontSize: 25),
+                  _validateAndSubmit)],
+                  
             ),
           ),
         ),
@@ -161,21 +161,4 @@ class _RegisterNewUser extends State<RegsiterNewUser> {
         ));
   }
 
-
-  // Creating Account Button
-  Widget _showPrimaryButton() {
-    return Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 75.0),
-        child: SizedBox(
-          height: 40.0,
-          child: MaterialButton(
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0)),
-              color: Colors.purple,
-              child: new Text('Create account',
-              style: new TextStyle(fontSize: 17.5, color: Colors.white)),
-              onPressed: _validateAndSubmit,
-              splashColor: Colors.purpleAccent),
-        ));
-  }
 }

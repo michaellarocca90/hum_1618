@@ -17,23 +17,23 @@ Widget _splashButtons(BuildContext context) {
   return Stack(
     children: <Widget>[
 
-      CommonAppButtons(
+      CommonAppButtons.navigation(
         AppButtonType.NAVIGATION,
         "Sign-In",
-        Alignment.center, 
-        LoginExistingUser(new FireBaseAuthorization()),
+        Alignment.center,
         new BorderRadius.circular(40.0),
-        new TextStyle(fontSize: 25)
+        new TextStyle(fontSize: 25),
+        LoginExistingUser(new FireBaseAuthorization())
         ),
 
 
-      CommonAppButtons(
+      CommonAppButtons.navigation(
         AppButtonType.NAVIGATION,
         "New Account", 
         Alignment.bottomCenter,
-        RegsiterNewUser(new FireBaseAuthorization()),
         new BorderRadius.circular(40.0),
-        new TextStyle(fontSize: 25))]
+        new TextStyle(fontSize: 25),
+        RegsiterNewUser(new FireBaseAuthorization()))]
   );
 }
 

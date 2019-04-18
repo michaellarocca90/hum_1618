@@ -1,39 +1,37 @@
 {
   "project_info": {
-    "project_number": "371344649976",
-    "firebase_url": "https://hum-backend.firebaseio.com",
-    "project_id": "hum-backend",
-    "storage_bucket": "hum-backend.appspot.com"
+    "project_number": "66184058681",
+    "firebase_url": "https://marc-backend-test.firebaseio.com",
+    "project_id": "marc-backend-test",
+    "storage_bucket": "marc-backend-test.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:371344649976:android:88c110685b1b4dbe",
+        "mobilesdk_app_id": "1:66184058681:android:88c110685b1b4dbe",
         "android_client_info": {
           "package_name": "com.mobile.hum_1618"
         }
       },
       "oauth_client": [
         {
-          "client_id": "371344649976-6tbebnvvpgdcjsdt23os2u0pm13kpjc5.apps.googleusercontent.com",
+          "client_id": "66184058681-quecfkdile8t32vn12vs5s30vq1it0bu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCMUVsipgIaTsogAraDMwsZwKwysNOgGsM"
+          "current_key": "AIzaSyCBoEvrAn-P0MrgSS_I0IW2pSU4EiKQQ44"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66184058681-quecfkdile8t32vn12vs5s30vq1it0bu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
