@@ -1,30 +1,24 @@
 
-
 // Library for exporting all files to have a single import
-
 // Example -> import 'shelf.dart';
 // Will import all exported files listed below
 
 
-// Import Form FireBase Folder
-export 'firebase/firebaseAuthorization.dart';
+// pages/1_splashPage
+export 'pages/1_splashPage/splash.dart';
 
+// pages/2_registrationFlow
+export 'pages/2_registraionFlow/user_info.dart';
+export 'pages/2_registraionFlow/new_user.dart';
+export 'pages/2_registraionFlow/log_IN.dart';
 
-// Imports from Pages Folder
-export 'pages/splash.dart';
-export 'pages/registerNewUser.dart';
-export 'pages/signInExistingUser.dart';
-export 'pages/registrationForm.dart';
+// pages/3_profileFeed
+export 'pages/3_profileFeed/feed.dart';
+export 'pages/3_profileFeed/profile.dart';
 
-// Imports from pages/profilefeed
-export 'pages/profileFeed/feed.dart';
+// plugins
+export 'plugins/firebaseAuthorization.dart';
 
-
-
-// Import From Widgets Folder
-export 'widgets/base_background.dart';
-export 'widgets/hum_checkbox.dart';
-export 'widgets/hum_customtextfield.dart';
-export 'widgets/hum_dropdown.dart';
-export 'widgets/hum_textfield.dart';
-
+// widgets
+export 'widgets/widgets.dart';
+export 'widgets/profile_map.dart';
