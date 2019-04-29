@@ -2,35 +2,46 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+import 'dart:io';
+import 'dart:async';
 
 // Project Library Import
-import '../shelf.dart';
-
+import '../../shelf.dart';
 
 
 class RegisterPage extends StatelessWidget {
-  String userId;
+  final String userId;
 
   RegisterPage(this.userId);
 
   @override
   Widget build(BuildContext context) {
     return BaseBackground(
-        RegisterForm(userId), "assets/hum_shake_purp_large.jpg");
+       "assets/hum_shake_purp_large.jpg",
+        RegisterForm(userId));
   }
 }
 
 class RegisterForm extends StatefulWidget {
-  String userId;
+  final String userId;
 
   RegisterForm(this.userId);
   @override
   RegisterFormState createState() {
-    return RegisterFormState();
+    return RegisterFormState(userId);
   }
 }
 
 class RegisterFormState extends State<RegisterForm> {
+
+  RegisterFormState(this.userID);
+
+  File _imageFile;
+
+  final String userID;
   final _formKey = GlobalKey<FormState>();
   String _gender;
   String _type;
@@ -46,18 +57,34 @@ class RegisterFormState extends State<RegisterForm> {
   TextEditingController zipController = new TextEditingController();
   TextEditingController bioController = new TextEditingController();
 
+
+  Future<String> _pickSaveImage(String imageId) async {
+  File imageFile = await ImagePicker.pickImage(source: ImageSource.camera);
+  StorageReference ref =
+    FirebaseStorage.instance.ref().child(imageId).child("image.jpg");
+  StorageUploadTask uploadTask = ref.putFile(imageFile);
+  return await (await uploadTask.onComplete).ref.getDownloadURL();
+}
+
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
         child: Form(
+
       key: _formKey,
+
       child: new ListView(
+
         padding: const EdgeInsets.symmetric(vertical: 200.0, horizontal: 40.0),
+
         children: <Widget>[
+
           new HumTextField("First Name", firstNameController),
           new HumTextField("Last Name", lastNameController),
           new HumDropdown("Gender", _categories, _gender, setGender),
           new HumCustomTextField(new TextFormField(
+
             controller: zipController,
             decoration: new InputDecoration(
                 labelText: "ZIP Code",
@@ -66,6 +93,7 @@ class RegisterFormState extends State<RegisterForm> {
                 border: OutlineInputBorder()),
             keyboardType: TextInputType.number,
             validator: (value) {
+
               if (value.isEmpty) {
                 return "Field `ZIP Code` cannot be blank";
               }
@@ -75,6 +103,7 @@ class RegisterFormState extends State<RegisterForm> {
               }
             },
           )),
+
           new HumDropdown("Type", _types, _type, setType),
           new HumCustomTextField(new TextFormField(
             controller: bioController,
@@ -86,60 +115,84 @@ class RegisterFormState extends State<RegisterForm> {
             keyboardType: TextInputType.multiline,
             maxLines: null,
           )),
+
           new HumCheckbox(
             "Allow access to location data",
             _optedIn,
             setOptedIn,
             validateOptIn(_optedIn),
           ),
+
+          ButtonBar(
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.photo_camera),
+                onPressed: () async => await _pickImageFromCamera(),
+                tooltip: 'Shoot picture',
+              ),
+              
+              IconButton(
+                icon: Icon(Icons.photo),
+                onPressed: () async => await _pickImageFromGallery(),
+                tooltip: 'Pick from gallery',
+              ),
+            ],
+          ),
+          this._imageFile == null ? Placeholder() : Image.file(this._imageFile),
+
           new Container(
               padding: const EdgeInsets.only(top: 40.0),
-              child: new RaisedButton(
-                child: const Text(
-                  'Submit',
-                  style: TextStyle(color: Colors.white, fontSize: 20.0),
-                ),
-                color: Colors.purple,
-                onPressed: () {
-                  // print(zipController);
+              child: 
 
-                  setState(() {
-                    _submitted = true;
-                  });
-
-                  if (_formKey.currentState.validate() && _optedIn) {
-                    // TODO: POST data
-                    Firestore.instance
-                        .collection('users')
-                        .document(widget.userId)
-                        .setData({
-                      'profile': {
-                        'first_name': firstNameController.text,
-                        'last_name': lastNameController.text,
-                        'gender': _gender
-                      },
-                      'type': _type,
-                      'zip_code': zipController.text
-                    });
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text("Successfully registered!"),
-                    ));
-                  }
-                },
-              )),
-          new Container(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: new RaisedButton(
-                child: const Text(
-                  'Back',
-                  style: TextStyle(color: Colors.white, fontSize: 20.0),
-                ),
-                color: Colors.grey.withOpacity(.35),
-                onPressed: () => {Navigator.pop(context)},
-              ))
+              CommonAppButtons.function(
+              AppButtonType.FUNCTION, 
+              "Submit",
+              Alignment.center,
+              new BorderRadius.circular(40.0),
+              new TextStyle(fontSize: 25),
+              _buttonPress)
+             ),
         ],
       ),
     ));
+  }
+
+  void _buttonPress(){
+
+    setState(() {
+      _submitted = true;
+      });
+      
+    if (_formKey.currentState.validate() && _optedIn) {
+
+      Firestore.instance
+      .collection('users')
+      .document(widget.userId)
+      .setData({
+        'first_name': firstNameController.text,
+        'last_name': lastNameController.text,
+        'gender': _gender,
+        'type': _type,
+        'zip_code': zipController.text,
+        'bio' :bioController.text
+        });
+
+
+      final StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(userID + ".png");
+      final StorageUploadTask task = firebaseStorageRef.putFile(_imageFile);
+
+
+      Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text("Successfully registered!"),
+      ));
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Profile(userID)
+      )
+    );
   }
 
   void setGender(String gender) {
@@ -169,5 +222,22 @@ class RegisterFormState extends State<RegisterForm> {
     }
 
     return null;
+    }
+
+    Future<Null> _pickImageFromGallery() async {
+    final File imageFile =
+        await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() => this._imageFile = imageFile);
   }
+
+  Future<Null> _pickImageFromCamera() async {
+    final File imageFile =
+        await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() => this._imageFile = imageFile);
+  }
+
+
+
+
+
 }

@@ -1,41 +1,30 @@
 
-// Flutter Packages
+
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../shelf.dart';
 
-// Project Library Import
-import '../shelf.dart';
-
-
-
-
-// Login Class - For signing an Existing User
-class LoginExistingUser extends StatefulWidget {
-
-  // Constucutor
-  LoginExistingUser(this.authorized);
-
+class LogIN extends StatefulWidget {
 
   final AbsFireBaseAuthorization authorized;
 
+  LogIN(this.authorized);
 
   @override
   State<StatefulWidget> createState() {
-    return _LoginExistingUserState();
+    return _LogINState();
   }
 }
 
-
-
-class _LoginExistingUserState extends State<LoginExistingUser> {
-
-  final _formKey = new GlobalKey<FormState>();
+class _LogINState extends State<LogIN> {
 
   String _email;
   String _password;
   bool _isLoading;
   String _errorMessage;
   bool _isIos;
+
+  final _formKey = new GlobalKey<FormState>();
+
 
   bool _validateAndSave() {
     final form = _formKey.currentState;
@@ -44,6 +33,12 @@ class _LoginExistingUserState extends State<LoginExistingUser> {
       return true;
     }
     return false;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _isLoading = false;
   }
 
   void _validateAndSubmit() async {
@@ -56,29 +51,26 @@ class _LoginExistingUserState extends State<LoginExistingUser> {
       String userId = "";
       try {
 
-          userId = await widget.authorized.loginExistingUser(_email, _password);
-          //userId?? do something -> profile or feed
-          Firestore.instance
-              .collection('users')
-              .document('DLv7WL41jfnUWgZg0leY')
-              .get()
-              .then((DocumentSnapshot ds) {
-            // use ds as a snapshot
-            print('ds: $ds.email');
-          });
+        userId = await widget.authorized.loginExistingUser(_email, _password);
+        print('Signed in: $userId');
 
-          print('Signed in: $userId');
-   
         setState(() {
           _isLoading = false;
-        });
+          });
 
-        // if (userId.length > 0 && userId != null && _formMode == FormMode.LOGIN) {
-        //   widget.onSignedIn();
-        // }
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Profile(userId)));
+
+        // Scaffold.of(context).showSnackBar(SnackBar(
+        // content: Text("Sign-In Successful"),
+        // ));
 
       } catch (e) {
+
         print('Error: $e');
+
         setState(() {
           _isLoading = false;
           if (_isIos) {
@@ -90,32 +82,43 @@ class _LoginExistingUserState extends State<LoginExistingUser> {
     }
   }
 
-//implement signUp button swap which leads to Profile Info Flow.
-
-  @override
-  void initState() {
-    super.initState();
-    _isLoading = false;
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
-    return BaseBackground(
+    return BaseBackground( 'assets/hum_shake_purp_middle.png',
+
         Container(
+
           child: Form(
+
             key: _formKey,
+
             child: Column(
+
               crossAxisAlignment: CrossAxisAlignment.center,
+
               mainAxisAlignment: MainAxisAlignment.center,
+
               children: <Widget>[
+
                 _showInput('Email'),
+
                 _showInput('Password'),
-                _showPrimaryButton()
+
+               CommonAppButtons.function(
+                  AppButtonType.FUNCTION,
+                  "Sign In",
+                  Alignment.center,
+                  new BorderRadius.circular(40.0),
+                  new TextStyle(fontSize: 25),
+                  _validateAndSubmit)
               ],
+
             ),
-          ),
-        ),
-        'assets/hum_shake_purp_middle.png');
+          )
+        )
+    );
   }
 
   Widget _showInput(String type) {
@@ -135,22 +138,6 @@ class _LoginExistingUserState extends State<LoginExistingUser> {
           validator: (value) => value.isEmpty ? '$type can\'t be empty' : null,
           onSaved: (value) =>
               type == "Email" ? _email = value : _password = value,
-        ));
-  }
-
-  Widget _showPrimaryButton() {
-    return Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 75.0),
-        child: SizedBox(
-          height: 40.0,
-          child: MaterialButton(
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0)),
-              color: Colors.purple,
-              child: new Text('Login',
-              style: new TextStyle(fontSize: 17.5, color: Colors.white)),
-              onPressed: _validateAndSubmit,
-              splashColor: Colors.purpleAccent),
         ));
   }
 }
