@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hum_1618/pages/feed.dart';
 import '../auth.dart';
 import '../widgets/base_background.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../register.dart';
-import './home_page.dart';
 
 class LoginSignup extends StatefulWidget {
   final BaseAuth auth;
@@ -51,7 +51,7 @@ class _LoginSignupState extends State<LoginSignup> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomePage()
+              builder: (context) => Feed2()
             )
           );
 

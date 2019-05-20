@@ -16,16 +16,6 @@ class HomePage extends StatelessWidget {
       }
       
       if (snapshot.data != null && snapshot.data.documents != null) {
-        // return ListView.builder(
-        //   // padding: const EdgeInsets.all(16.0),
-        //   itemBuilder: (context, i){
-        //     // final index = i % snapshot.data.documents.length;
-        //     return Card(
-        //       child: _buildUserInfo(snapshot.data.documents[1]),
-        //     );
-      
-        //   },
-        // );
         return _buildUserInfo(snapshot.data.documents[1]);
       }
 
@@ -34,9 +24,6 @@ class HomePage extends StatelessWidget {
 
     },
   );
-
-  //  return BaseBackground(
-  //    Container(child: Text("hi")), "assets/hum_shake_purp_large.jpg");
   }
 
   Widget _buildUserInfo(DocumentSnapshot document) {
