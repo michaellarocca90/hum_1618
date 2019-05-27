@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hum_1618/pages/feed.dart';
 import '../auth.dart';
 import '../widgets/base_background.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -46,15 +47,13 @@ class _LoginSignupState extends State<LoginSignup> {
       try {
         if (_formMode == FormMode.LOGIN) {
           userId = await widget.auth.signIn(_email, _password);
-          //userId?? do something -> profile or feed
-          Firestore.instance
-              .collection('users')
-              .document('DLv7WL41jfnUWgZg0leY')
-              .get()
-              .then((DocumentSnapshot ds) {
-            // use ds as a snapshot
-            print('ds: $ds.email');
-          });
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Feed2()
+            )
+          );
 
           print('Signed in: $userId');
         } else {

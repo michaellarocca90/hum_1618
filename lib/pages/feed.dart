@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Feed2 extends StatelessWidget {
@@ -9,7 +10,7 @@ class Feed2 extends StatelessWidget {
 
   Feed2();
 
-  Widget _buildFeedItem(BuildContext context, int index) {
+  Widget _buildFeedItem(BuildContext context, DocumentSnapshot document) {
     return Container(
         color: Colors.transparent,
         child: Row(
@@ -33,7 +34,12 @@ class Feed2 extends StatelessWidget {
                         icon: Icon(Icons.add_circle),
                         color: Colors.black45,
                         onPressed: () {
-                          print(inNeeds[index]['name']);
+                          //print(inNeeds[index]['name']);
+                          if(document["profile"] != null)
+                            print(document["profile"]["first_name"]);
+                          else {
+                            print("No first_name provided");
+                          }  
                         },
                       ),
                     )
@@ -45,11 +51,17 @@ class Feed2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.purple[100],
-        child: ListView.builder(
-          itemBuilder: _buildFeedItem,
-          itemCount: inNeeds.length,
+    return Scaffold(
+        body: StreamBuilder(
+              stream: Firestore.instance.collection("users").snapshots(),
+              builder: (context, snapshot) {
+                if(!snapshot.hasData) return const Text('Loading...');
+                return ListView.builder(
+                 itemCount: snapshot.data.documents.length,
+                 itemBuilder: (context, index) => 
+                    _buildFeedItem(context, snapshot.data.documents[index]),
+               );
+              }
         ));
   }
 }
